@@ -2,6 +2,6 @@
 
 @baseUrl = http://localhost:3030
 
-GET {{baseUrl}}/test
+GET {{baseUrl}}/register
 
 ###
