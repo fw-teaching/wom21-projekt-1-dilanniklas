@@ -4,7 +4,7 @@ const Register = require("../models/registerModel")   //behöver register data m
 
 
 
-console.log("Register funkar!")
+console.log("branch dilan merged into main branch")
 
 
 
