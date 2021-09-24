@@ -5,13 +5,13 @@ GET {{baseUrl}}
 
 ###
 
-POST {{baseUrl}}/register
+POST {{baseUrl}}/user
 Content-Type: application/json
 
 {
     "name": "Dilan",
     "surname": "Ledeon",
-    "email": "Dilan@gmail.com",
+    "email": "Dilan@gmll.com",
     "password": "hejhej123"
 
 }

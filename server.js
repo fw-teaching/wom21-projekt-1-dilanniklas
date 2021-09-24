@@ -20,8 +20,8 @@ app.get('/', (req, res) => {
 
 
 //Vi importerar Register route-modul 
-const registerRouter = require('./routers/register')
-app.use('/register', registerRouter)
+const userRouter = require('./routers/user')
+app.use('/user', userRouter)
 
 
 app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
