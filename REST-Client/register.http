@@ -1,0 +1,17 @@
+
+@baseUrl = http://localhost:3030
+
+GET {{baseUrl}}
+
+###
+
+POST {{baseUrl}}/register
+Content-Type: application/json
+
+{
+    "name": "Dilan",
+    "surname": "Ledeon",
+    "email": "Dilan@gmail.com",
+    "password": "hejhej123"
+
+}
