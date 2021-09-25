@@ -41,14 +41,15 @@ router.post('/login', async (req, res) =>{
         if (match) { 
 
              //skapar jwtBodyn av id och email
-            const jwtBody = {
+            const jwtBody = { 
                 sub: user._id,
                 email: user.email
             }
 
-            const accessToken = await jwt.sign(
-                jwtBody,   
-                process.env.JWT_SECRET,  
+           //signerar med den hemliga nyckeln JWT_SECRET --> skapar Signature
+            const accessToken = await jwt.sign(  
+                jwtBody,   //payload
+                process.env.JWT_SECRET,  //nyckeln
                 {expiresIn: '30d'}
             )
 
