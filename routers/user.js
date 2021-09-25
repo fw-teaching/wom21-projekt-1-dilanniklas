@@ -1,6 +1,7 @@
 const express = require("express")
 const router = express.Router()
 const bcrypt = require("bcrypt")
+const jwt = require("jsonwebtoken")
 const User = require("../models/usersModel")   //behöver register data modellen
 
 console.log("Register läses in")
@@ -20,6 +21,41 @@ router.post('/', async (req, res) =>{
 
         const newUser = await user.save()
         res.status(201).send(newUser)
+
+    } catch (error) {
+        res.status(500).json({message: "Please provide another email!"})
+    }
+})
+
+router.post('/login', async (req, res) =>{
+    try {
+        //hitta User 
+        const user = await User.findOne({ email: req.body.email }).exec() 
+        //om de inte finns sådan USER så returnera detta meddelande
+        if(!user) return res.status(400).json({ message: "No such user" })
+
+        //jämför lösenorden
+        const match = await bcrypt.compare(req.body.password, user.password) 
+        
+        //om lösenorden matchar 
+        if (match) { 
+
+             //skapar jwtBodyn av id och email
+            const jwtBody = {
+                sub: user._id,
+                email: user.email
+            }
+
+            const accessToken = await jwt.sign(
+                jwtBody,   
+                process.env.JWT_SECRET,  
+                {expiresIn: '30d'}
+            )
+
+            return res.status(201).send({accessToken: accessToken})
+        }
+       
+         res.status(201).send('failed')
 
     } catch (error) {
         res.status(500).json({message: error.message})
