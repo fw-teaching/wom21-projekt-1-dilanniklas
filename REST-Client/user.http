@@ -1,0 +1,27 @@
+
+@baseUrl = http://localhost:3030
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MTRlZDljOTI2YTY0Mjc0MjA0MWRmM2MiLCJlbWFpbCI6IkRpbGFuQGdtYWlsLmNvbW0iLCJpYXQiOjE2MzI1NTc2MzYsImV4cCI6MTYzNTE0OTYzNn0.-c2OY6BQDdpqAVRTcB8iBt_fvYs-tJI4JbZ8505kZ24
+GET {{baseUrl}}
+
+### Regisrera en ny användare
+
+POST {{baseUrl}}/user
+Content-Type: application/json
+
+{
+    "name": "Dilan",
+    "surname": "Ledeon",
+    "email": "Dilan@gmail.comm",
+    "password": "hejhej123"
+
+}
+
+### Logga in 
+
+POST {{baseUrl}}/user/login
+Content-Type: application/json
+
+{
+    "email": "Dilan@gmail.comm",
+    "password": "hejhej123"
+}

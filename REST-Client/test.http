@@ -1,7 +1,0 @@
-### Testfil för VSCode-tillägget REST Client
-
-@baseUrl = http://localhost:3030
-
-GET {{baseUrl}}/test
-
-###
