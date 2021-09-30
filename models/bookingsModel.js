@@ -1,14 +1,16 @@
 const mongoose = require('mongoose')
+require("../models/cabinsModel")
 
 const bookingsSchema = new mongoose.Schema({
+    cabinId: {
+        type: mongoose.Schema.Types.ObjectId, ref: 'Advertise',
+        required: true
+    },
     lodger: {
         type: String,
         required: true,
     },
-    cabin: {
-        type: Number,
-        required: true
-    },
+    
     arrivalDate: {
         type: Date,
         required: true

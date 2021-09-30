@@ -45,5 +45,22 @@ Authorization: Bearer {{token}}
 
 ### Hämta stugor
 
+// Den här borde kanske ändras så att man inte behöver auktorisering
 GET {{baseUrl}}/cabins
 Authorization: Bearer {{token}}
+
+### Hämta en viss stuga, inkl. bokningar
+
+GET {{baseUrl}}/cabins/61560ce8b718241d9f467c71
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Boka stuga
+POST {{baseUrl}}/bookings/61560ce8b718241d9f467c71
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "arrivalDate": "2021-09-30T10:32:09.146Z",
+    "departureDate": "2021-09-30T11:26:56.392Z"
+}

@@ -30,8 +30,8 @@ const cabinsRouter = require('./routers/cabins')
 app.use('/cabins', cabinsRouter)
 
 // bookings
-// const bookingsRouter = require('./routers/bookings')
-// app.use('/bookings', bookingsRouter)
+const bookingsRouter = require('./routers/bookings')
+app.use('/bookings', bookingsRouter)
 
 
 
