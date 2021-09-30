@@ -1,6 +1,7 @@
 
 @baseUrl = http://localhost:3030
-@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MTRlZDljOTI2YTY0Mjc0MjA0MWRmM2MiLCJlbWFpbCI6IkRpbGFuQGdtYWlsLmNvbW0iLCJpYXQiOjE2MzI1NTc2MzYsImV4cCI6MTYzNTE0OTYzNn0.-c2OY6BQDdpqAVRTcB8iBt_fvYs-tJI4JbZ8505kZ24
+// OBS. ändra då du använder den slutliga databasen:
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MTU1N2NhZjUzYWJmNTY5YmY5NGU0MGEiLCJlbWFpbCI6IkRpbGFuQGdtYWlsLmNvbW0iLCJpYXQiOjE2MzMwMDAwOTMsImV4cCI6MTYzNTU5MjA5M30.ZwOp6Am1S_hQnx2plBToHA2cTraTLB9ybIceWfRlCVE
 GET {{baseUrl}}
 
 ### Regisrera en ny användare
@@ -25,3 +26,24 @@ Content-Type: application/json
     "email": "Dilan@gmail.comm",
     "password": "hejhej123"
 }
+
+### Annonsera en ny stuga
+
+POST {{baseUrl}}/cabins
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "renter": "Drew Goddard",
+    "address": "in the woods",
+    "size": 30,
+    "sauna": false,
+    "beach": false,
+    "price": 5
+
+}
+
+### Hämta stugor
+
+GET {{baseUrl}}/cabins
+Authorization: Bearer {{token}}
