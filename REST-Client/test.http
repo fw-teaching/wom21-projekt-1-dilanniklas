@@ -1,0 +1,48 @@
+@baseUrl = http://localhost:3030
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MTU1ZmM2MDNjMDA3NzYyN2UwMmQ5OTIiLCJlbWFpbCI6IkRpbG5ubkBnbWFpbC5jb21tIiwiaWF0IjoxNjMzMDI1MTM2LCJleHAiOjE2MzU2MTcxMzZ9.YMPPREjcnC-UYWkqPBTCD70CAZqa2ONKKjUYV7PUj_E
+
+GET {{baseUrl}}
+
+### Regisrera en ny användare
+
+POST {{baseUrl}}/user
+Content-Type: application/json
+
+{
+    "name": "Dilan",
+    "surname": "Ledeon",
+    "email": "Dilnnn@gmail.comm",
+    "password": "hejhej123"
+
+}
+
+### Logga in 
+
+POST {{baseUrl}}/user/login
+Content-Type: application/json
+
+{
+    "email": "Dilnnn@gmail.comm",
+    "password": "hejhej123"
+}
+
+### Annonsera en ny stuga
+
+POST {{baseUrl}}/cabins
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "renter": "Drew Goddard",
+    "address": "in the woods",
+    "size": 30,
+    "sauna": false,
+    "beach": false,
+    "price": 5
+
+}
+
+### Hämta stugor
+
+GET {{baseUrl}}/cabins
+Authorization: Bearer {{token}}

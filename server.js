@@ -19,9 +19,17 @@ app.get('/', (req, res) => {
 })
 
 
-//Vi importerar Register route-modul 
+//Vi importerar Register route-modulerna
 const userRouter = require('./routers/user')
 app.use('/user', userRouter)
+
+// cabins
+const cabinsRouter = require('./routers/cabins')
+app.use('/cabins', cabinsRouter)
+
+// bookings
+const bookingsRouter = require('./routers/bookings')
+app.use('/bookings', bookingsRouter)
 
 
 app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
