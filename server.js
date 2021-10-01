@@ -22,8 +22,8 @@ app.get('/', (req, res) => {
 //Vi importerar route-moduler:
 
 // user
-const userRouter = require('./routers/user')
-app.use('/user', userRouter)
+const userRouter = require('./routers/users')
+app.use('/users', userRouter)
 
 // cabins
 const cabinsRouter = require('./routers/cabins')

@@ -4,8 +4,6 @@ const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 const User = require("../models/usersModel")   //behöver register data modellen
 
-console.log("Register läses in")
-
 //Skapa en användare mha POST
 router.post('/', async (req, res) =>{
 

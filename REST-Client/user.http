@@ -1,29 +1,30 @@
 
 @baseUrl = http://localhost:3030
-// OBS. ändra då du använder den slutliga databasen:
-@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MTU1N2NhZjUzYWJmNTY5YmY5NGU0MGEiLCJlbWFpbCI6IkRpbGFuQGdtYWlsLmNvbW0iLCJpYXQiOjE2MzMwMDAwOTMsImV4cCI6MTYzNTU5MjA5M30.ZwOp6Am1S_hQnx2plBToHA2cTraTLB9ybIceWfRlCVE
+
+### OBS. ändra då du använder den slutliga databasen:
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MTU2YzI5ZjRhNDViZjY3ZDg4OTkwOGIiLCJlbWFpbCI6IkRpbGFhbkBnbWFpbC5jb21tIiwiaWF0IjoxNjMzMDc2NTkwLCJleHAiOjE2MzU2Njg1OTB9.WV3MJ1IofXhf7ORAqWhP02TyG9Kzoac8QF-dWzqSfpc
 GET {{baseUrl}}
 
 ### Regisrera en ny användare
 
-POST {{baseUrl}}/user
+POST {{baseUrl}}/users
 Content-Type: application/json
 
 {
     "name": "Dilan",
     "surname": "Ledeon",
-    "email": "Dilan@gmail.comm",
+    "email": "Dilaan@gmail.comm",
     "password": "hejhej123"
 
 }
 
 ### Logga in 
 
-POST {{baseUrl}}/user/login
+POST {{baseUrl}}/users/login
 Content-Type: application/json
 
 {
-    "email": "Dilan@gmail.comm",
+    "email": "Dilaan@gmail.comm",
     "password": "hejhej123"
 }
 
@@ -43,24 +44,54 @@ Authorization: Bearer {{token}}
 
 }
 
-### Hämta stugor
-
-// Den här borde kanske ändras så att man inte behöver auktorisering
+### Hämta stugor 
 GET {{baseUrl}}/cabins
 Authorization: Bearer {{token}}
 
-### Hämta en viss stuga, inkl. bokningar
 
-GET {{baseUrl}}/cabins/61560ce8b718241d9f467c71
+### Hämta en viss stuga, inkl. bokningar
+GET {{baseUrl}}/cabins/6155fe2c3c3fa22c02ccc185
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
-### Boka stuga
-POST {{baseUrl}}/bookings/61560ce8b718241d9f467c71
+
+### Annonsera en ny stuga
+POST {{baseUrl}}/cabins
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
+    "owner": "Drew Goddard",
+    "address": "in the woods",
+    "size": 30,
+    "sauna": false,
+    "beach": true,
+    "price": 5
+
+}
+
+### Boka en stuga 
+POST {{baseUrl}}/bookings
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "cabinId": "615600244463e33cc0704aaf", 
+    "lodger": "Dilaan@gmail.com",
     "arrivalDate": "2021-09-30T10:32:09.146Z",
     "departureDate": "2021-09-30T11:26:56.392Z"
 }
+
+### Ändra något i en stuga
+PUT {{baseUrl}}/cabins/615600244463e33cc0704aaf
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "size": 80
+}
+
+
+### Radera en stuga 
+DELETE {{baseUrl}}/cabins/615600244463e33cc0704aaf
+Authorization: Bearer {{token}}
