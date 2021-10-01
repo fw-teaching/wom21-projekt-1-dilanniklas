@@ -2,7 +2,7 @@
 @baseUrl = http://localhost:3030
 
 ### OBS. ändra då du använder den slutliga databasen:
-@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MTU2YzI5ZjRhNDViZjY3ZDg4OTkwOGIiLCJlbWFpbCI6IkRpbGFhbkBnbWFpbC5jb21tIiwiaWF0IjoxNjMzMDc2NTkwLCJleHAiOjE2MzU2Njg1OTB9.WV3MJ1IofXhf7ORAqWhP02TyG9Kzoac8QF-dWzqSfpc
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MTU2Y2NjNzkwNDRkNDg3MzU1MGRiODIiLCJlbWFpbCI6IkRpbGFhbkBnbWFpbC5jb21tIiwiaWF0IjoxNjMzMDc4NDc0LCJleHAiOjE2MzU2NzA0NzR9.TeOmtwCQ7QBhB4jJ1ze3L4b8vg2BGWi4V1OQ1CKl5jo
 GET {{baseUrl}}
 
 ### Regisrera en ny användare
@@ -49,12 +49,6 @@ GET {{baseUrl}}/cabins
 Authorization: Bearer {{token}}
 
 
-### Hämta en viss stuga, inkl. bokningar
-GET {{baseUrl}}/cabins/6155fe2c3c3fa22c02ccc185
-Content-Type: application/json
-Authorization: Bearer {{token}}
-
-
 ### Annonsera en ny stuga
 POST {{baseUrl}}/cabins
 Content-Type: application/json
@@ -71,7 +65,7 @@ Authorization: Bearer {{token}}
 }
 
 ### Boka en stuga 
-POST {{baseUrl}}/bookings/6156cab7fa27037a3f5166b0
+POST {{baseUrl}}/bookings/6156ce1b783be1725a0f31ec
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
@@ -92,5 +86,5 @@ Authorization: Bearer {{token}}
 
 
 ### Radera en stuga 
-DELETE {{baseUrl}}/cabins/615600244463e33cc0704aaf
+DELETE {{baseUrl}}/cabins/6156cab7fa27037a3f5166b0
 Authorization: Bearer {{token}}

@@ -67,6 +67,7 @@ router.put('/:id', getCabinById, async (req, res) => {
     }
 })
 
+//Raderar 
 router.delete('/:id', getCabinById, async (req, res)=> {
     try {
         await Cabin.deleteOne({_id: req.params.id }).exec()
@@ -76,21 +77,5 @@ router.delete('/:id', getCabinById, async (req, res)=> {
         res.status(500).send(error.message)
     }
 })   
-
-
-// Hämta en stuga och visa dess bokningar
-router.get('/:cabin_id', async (req, res) =>{
-const cabin = await Cabin.findOne({ cabin: req.params.cabin_id }).populate('bookings')
-// OBS. populate() fungerar inte som det ska, men fältet lagras över på nästa rad
-cabin['bookings'] = await Booking.find({cabinId: req.params.cabin_id})
-res.status(201).send(cabin)
-})
-
-// idé: lista stugor som är lediga en viss tid
-// router.get('/available/date_range', async (req, res) =>{
-//     const bookings = await Cabin.
-//             findOne({ cabin: req.params.cabin_id }).
-//             populate('booking')
-//     })
 
 module.exports = router
