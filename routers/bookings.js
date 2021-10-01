@@ -5,11 +5,6 @@ const Booking = require("../models/bookingsModel")
 const Cabin = require("../models/cabinsModel")
 const authorize = require('../middleware/authorize')
 
-<<<<<<< HEAD
-// middleware för authorisering
-router.use(authorize)
-
-=======
 require('dotenv').config() //läser in env filen för att få JWT_SECRET
 
 // middleware för authorisering
@@ -26,7 +21,6 @@ const getBookingById = async (req, res, next) => {
 }
 
 
->>>>>>> dilan
 // Skapa en bokning med POST
 router.post('/:cabin_id', async (req, res) =>{
     
@@ -34,11 +28,7 @@ router.post('/:cabin_id', async (req, res) =>{
     {
         const booking = new Booking({
             "cabinId": req.params.cabin_id,
-<<<<<<< HEAD
-            "lodger": req.authUser.email,
-=======
             "renter": req.authUser.email,
->>>>>>> dilan
             "arrivalDate": req.body.arrivalDate,
             "departureDate": req.body.departureDate
         })
@@ -53,20 +43,12 @@ router.post('/:cabin_id', async (req, res) =>{
     }
 })
 
-<<<<<<< HEAD
-// Hämta en bokning
-router.get('/:booking_id', async (req, res) =>{
-
-    try
-    {
-=======
 // Hämta alla bokningar
 router.get('/', async (req, res) =>{
     try
     {
         const bookings = await Booking.find()
 
->>>>>>> dilan
         res.status(201).send(bookings)
     }
     catch (error)
@@ -75,10 +57,6 @@ router.get('/', async (req, res) =>{
     }
 })
 
-<<<<<<< HEAD
-
-module.exports = router
-=======
 //Radera en bokning
 router.delete('/:id', getBookingById, async (req, res) =>{
     const authHeader = req.headers['authorization']
@@ -116,5 +94,3 @@ router.put('/:id', getBookingById, async (req, res) =>{
 })
 
 module.exports = router
-
->>>>>>> dilan

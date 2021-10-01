@@ -2,11 +2,7 @@ const mongoose = require('mongoose')
 require("../models/bookingsModel")
 
 const cabinsSchema = new mongoose.Schema({
-<<<<<<< HEAD
-    renter: {
-=======
     owner: {
->>>>>>> dilan
         type: String,
         required: true,
     },
@@ -30,13 +26,9 @@ const cabinsSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-<<<<<<< HEAD
-    bookings: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Bookings' }]
-=======
     bookings: [{ 
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'Bookings' }]
->>>>>>> dilan
 }, { timestamps: true })
 
 module.exports = mongoose.model(
