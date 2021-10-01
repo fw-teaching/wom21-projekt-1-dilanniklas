@@ -13,12 +13,6 @@ db.once('open', () => console.log('Connected to DB'))
 
 app.use(express.json())  //API:n ska ta emot JSON-format 
 
-// Testa att detta funkar, ersätt sedan med egen kod
-app.get('/', (req, res) => {
-    res.json({message: "Serverjs funkar"})
-})
-
-
 //Vi importerar route-moduler:
 
 // user

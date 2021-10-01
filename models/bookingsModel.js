@@ -7,7 +7,7 @@ const bookingsSchema = new mongoose.Schema({
         ref: 'Cabins',
         required: true
     },
-    lodger: {
+    renter: {
         type: String,
         required: true,
     },

@@ -1,18 +1,16 @@
 
-@baseUrl = http://localhost:3030
+@baseUrl=http://localhost:3030
 
-### OBS. ändra då du använder den slutliga databasen:
-@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MTU2ZDUyYjkxMzZiNjdlZmU5OThmYjkiLCJlbWFpbCI6IkpvbmFzQGdtYWlsLmNvbW0iLCJpYXQiOjE2MzMwOTM1NDQsImV4cCI6MTYzNTY4NTU0NH0.AYEbCzi8EKlB7kYcNoZwgnGj8g8osOignwXFYBS1O84
-GET {{baseUrl}}
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MTU3NDBkOWY0MGY3ZDYzNWVlMDU5ODkiLCJlbWFpbCI6IkxhcmFAZ21haWwuY29tIiwiaWF0IjoxNjMzMTA4MTk3LCJleHAiOjE2MzgyOTIxOTd9.AQqRt43Gk1CEavl0FYp3VvH4lrF_As05SLNwmGkc60U
 
 ### Registrera en ny användare
 POST {{baseUrl}}/users
 Content-Type: application/json
 
 {
-    "name": "Jonas",
-    "surname": "Ledeon",
-    "email": "Jonas@gmail.com",
+    "name": "Lara",
+    "surname": "Vikman",
+    "email": "Lara@gmail.com",
     "password": "hejhej123"
 
 }
@@ -22,9 +20,10 @@ POST {{baseUrl}}/users/login
 Content-Type: application/json
 
 {
-    "email": "Jonas@gmail.comm",
+    "email": "Lara@gmail.com",
     "password": "hejhej123"
 }
+
 
 ### Annonsera en ny stuga
 POST {{baseUrl}}/cabins
@@ -32,12 +31,12 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-    "renter": "Drew Goddard",
-    "address": "in the woods",
-    "size": 30,
-    "sauna": false,
-    "beach": false,
-    "price": 5
+    "owner": "Dilan",
+    "address": "in the house",
+    "size": 310,
+    "sauna": true,
+    "beach": true,
+    "price": 50
 
 }
 
@@ -47,32 +46,50 @@ Authorization: Bearer {{token}}
 
 
 ### Boka en stuga 
-POST {{baseUrl}}/bookings/6156ce1b783be1725a0f31ec
+POST {{baseUrl}}/bookings/615731fed16595269a4d721e
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-    "lodger": "Dilaan@gmail.com",
-    "arrivalDate": "2021-09-30T10:32:09.146Z",
-    "departureDate": "2021-09-30T11:26:56.392Z"
+    "arrivalDate": "2021-09-30",
+    "departureDate": "2021-10-30"
 }
 
-### Ändra hela objektet med PUT 
-PUT {{baseUrl}}/cabins/61570104932917ac9aa81834
+### Hämta alla bokningar
+GET {{baseUrl}}/bookings
+Authorization: Bearer {{token}}
+
+### Avboka 
+DELETE {{baseUrl}}/bookings/6157310892f9321123684a3c
+Authorization: Bearer {{token}}
+
+### Ändra sin bokning 
+PUT {{baseUrl}}/bookings/6157389f68bca1999e22d7fd
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-    "renter": "Jonas@gmail.com",
+    "arrivalDate": "2021-01-01",
+    "departureDate": "2025-12-12"
+}
+
+
+### Ändra en stuga, hela objektet med PUT 
+PUT {{baseUrl}}/cabins/615731fed16595269a4d721e
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "owner": "Jonas@gmail.com",
     "address": "in the woods",
-    "size": 20,
+    "size": 2,
     "sauna": true,
     "beach": false,
-    "price": 2
+    "price": 200
 }
 
-### Ändra enskilt värde med PATCH 
-PATCH {{baseUrl}}/cabins/61570104932917ac9aa81834
+### Ändra enskilt värde i en stuga, med PATCH 
+PATCH {{baseUrl}}/cabins/6157329ed16595269a4d7221
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
@@ -83,8 +100,9 @@ Authorization: Bearer {{token}}
 
 
 ### Radera en stuga 
-DELETE {{baseUrl}}/cabins/61570717429168c608f191e8
+DELETE {{baseUrl}}/cabins/6157329ed16595269a4d7221
 Authorization: Bearer {{token}}
+
 
 
 
