@@ -2,23 +2,22 @@ const express = require("express")
 const router = express.Router()
 const jwt = require("jsonwebtoken")
 const Booking = require("../models/bookingsModel")
+const Cabin = require("../models/cabinsModel")
 const authorize = require('../middleware/authorize')
 
 // middleware för authorisering
 router.use(authorize)
 
-// Skapa en annons med POST
-router.post('/', async (req, res) =>{
-
+// Skapa en bokning med POST
+router.post('/:cabin_id', async (req, res) =>{
+    
     try
     {
         const booking = new Booking({
-            renter: req.body.renter,
-            address: req.body.address,
-            size: req.body.size,
-            sauna: req.body.sauna,     
-            beach: req.body.beach,
-            price: req.body.price
+            "cabinId": req.params.cabin_id,
+            "lodger": req.authUser.email,
+            "arrivalDate": req.body.arrivalDate,
+            "departureDate": req.body.departureDate
         })
 
         const newBooking = await booking.save()
@@ -31,14 +30,11 @@ router.post('/', async (req, res) =>{
     }
 })
 
-// Hämta alla stugor
-router.get('/', async (req, res) =>{
+// Hämta en bokning
+router.get('/:booking_id', async (req, res) =>{
 
     try
     {
-        const bookings = await Booking.find()
-
-
         res.status(201).send(bookings)
     }
     catch (error)

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+require("../models/bookingsModel")
 
 const cabinsSchema = new mongoose.Schema({
     renter: {
@@ -24,10 +25,11 @@ const cabinsSchema = new mongoose.Schema({
     price: {
         type: Number,
         required: true
-    }
+    },
+    bookings: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Bookings' }]
 }, { timestamps: true })
 
 module.exports = mongoose.model(
-    'Advertise',
+    'Cabins',
     cabinsSchema
 )
