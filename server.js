@@ -13,17 +13,13 @@ db.once('open', () => console.log('Connected to DB'))
 
 app.use(express.json())  //API:n ska ta emot JSON-format 
 
-//Vi importerar route-moduler:
-
-// user
+//Importerar route-moduler:
 const userRouter = require('./routers/users')
 app.use('/users', userRouter)
 
-// cabins
 const cabinsRouter = require('./routers/cabins')
 app.use('/cabins', cabinsRouter)
 
-// bookings
 const bookingsRouter = require('./routers/bookings')
 app.use('/bookings', bookingsRouter)
 
