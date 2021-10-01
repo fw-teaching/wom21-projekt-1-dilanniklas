@@ -2,6 +2,7 @@ const express = require("express")
 const router = express.Router()
 const jwt = require("jsonwebtoken")
 const Cabin = require("../models/cabinsModel")
+const Booking = require("../models/bookingsModel")
 const authorize = require('../middleware/authorize')
 
 require('dotenv').config()
@@ -26,7 +27,7 @@ router.post('/', async (req, res) =>{
     try
     {
         const cabin = new Cabin({
-            owner: req.authUser.email,
+            renter: req.authUser.email,
             address: req.body.address,
             size: req.body.size,
             sauna: req.body.sauna,     
@@ -58,6 +59,22 @@ router.get('/', async (req, res) =>{
     }
 })
 
+// Hämta en stuga och visa dess bokningar
+
+router.get('/:cabin_id', async (req, res) =>{
+const cabin = await Cabin.findOne({ cabin: req.params.cabin_id }).populate('bookings')
+// OBS. populate() fungerar inte som det ska, men fältet lagras över på nästa rad
+cabin['bookings'] = await Booking.find({cabinId: req.params.cabin_id})
+res.status(201).send(cabin)
+})
+
+// idé: lista stugor som är lediga en viss tid
+// router.get('/available/date_range', async (req, res) =>{
+//     const bookings = await Cabin.
+//             findOne({ cabin: req.params.cabin_id }).
+//             populate('booking')
+//     })
+
 //Raderar 
 router.delete('/:id', getCabinById, async (req, res)=> {
     const authHeader = req.headers['authorization']
@@ -66,13 +83,13 @@ router.delete('/:id', getCabinById, async (req, res)=> {
     const authUser = jwt.verify(token, process.env.JWT_SECRET) //får den inloggades email ( authUser.email )
     const cabinEmail = await Cabin.findOne({ _id: req.params.id }).exec() //får email från vem posten är skapad av 
 
-    if(authUser.email == cabinEmail.owner ) { //jämför om emailen är likadana 
+    if(authUser.email == cabinEmail.renter  ) { //jämför om emailen är likadana 
 
         await Cabin.deleteOne({_id: req.params.id }).exec()  // radera om det är samma email
         res.json({message: "Cabin deleted!"}) 
 
     } else {
-        res.status(500).send({message:'Not allowed to delete others posts'})
+        res.status(500).send({auth:false, message:'Not allowed to delete others posts'})
     }
 })  
 
@@ -84,12 +101,12 @@ router.put('/:id', getCabinById, async (req, res) =>{
     const authUser = jwt.verify(token, process.env.JWT_SECRET)   //får den inloggades email
     const cabinEmail = await Cabin.findOne({ _id: req.params.id }).exec()   //får email från vem posten är skapad av 
 
-    if(authUser.email == cabinEmail.owner  ) {
+    if(authUser.email == cabinEmail.renter  ) {
         const updatedCabin = await req.cabin.updateOne(req.body).exec()
   
         res.json({message: "Cabin updated!", modified: updatedCabin.modifiedCount}) 
     } else {
-        res.status(500).send({message:'Not allowed to edit others posts'})
+        res.status(500).send({auth:false, message:'Not allowed to edit others posts'})
     }
     
 })
@@ -102,12 +119,12 @@ router.patch('/:id', getCabinById, async (req, res) =>{
     const authUser = jwt.verify(token, process.env.JWT_SECRET)   //får den inloggades email
     const cabinEmail = await Cabin.findOne({ _id: req.params.id }).exec()   //får email från vem posten är skapad av 
 
-    if(authUser.email == cabinEmail.owner  ) {
+    if(authUser.email == cabinEmail.renter  ) {
         const updatedCabin = await req.cabin.updateOne(req.body).exec()
   
         res.json({message: "Cabin updated!", modified: updatedCabin.modifiedCount}) 
     } else {
-        res.status(500).send({message:'Not allowed to edit others posts'})
+        res.status(500).send({auth:false, message:'Not allowed to edit others posts'})
     }
     
 })

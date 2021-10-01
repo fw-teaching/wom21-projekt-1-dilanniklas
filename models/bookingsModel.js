@@ -11,7 +11,6 @@ const bookingsSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    
     arrivalDate: {
         type: Date,
         required: true
