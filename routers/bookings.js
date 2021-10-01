@@ -35,8 +35,6 @@ router.get('/:booking_id', async (req, res) =>{
 
     try
     {
-        
-
         res.status(201).send(bookings)
     }
     catch (error)

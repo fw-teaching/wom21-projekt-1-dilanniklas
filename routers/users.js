@@ -4,8 +4,6 @@ const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 const User = require("../models/usersModel")   //behöver register data modellen
 
-console.log("Register läses in")
-
 //Skapa en användare mha POST
 router.post('/', async (req, res) =>{
 
@@ -56,7 +54,7 @@ router.post('/login', async (req, res) =>{
             return res.status(201).send({accessToken: accessToken})
         }
        
-         res.status(201).send('failed')
+         res.status(201).send('No such user!')
 
     } catch (error) {
         res.status(500).json({message: error.message})

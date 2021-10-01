@@ -1,0 +1,2 @@
+DB_URL=mongodb+srv://user:5WNC3ZKj4EHKIVOn@pro1.2lmpg.mongodb.net/Pro1?retryWrites=true&w=majority
+JWT_SECRET=14b8862e4da0699f3816957c

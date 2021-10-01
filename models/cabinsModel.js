@@ -26,10 +26,10 @@ const cabinsSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    bookings: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Book' }]
+    bookings: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Bookings' }]
 }, { timestamps: true })
 
 module.exports = mongoose.model(
-    'Advertise',
+    'Cabins',
     cabinsSchema
 )
