@@ -62,7 +62,6 @@ router.post('/:cabin_id', async (req, res) =>{
         }
         else 
         {
-            //console.log(bookingCheck)
             res.status(201).json(bookingCheck)
         }
     }
