@@ -2,15 +2,14 @@ const express = require("express")
 const router = express.Router()
 const jwt = require("jsonwebtoken")
 const Cabin = require("../models/cabinsModel")
-const Booking = require("../models/bookingsModel")
 const authorize = require('../middleware/authorize')
-const usersModel = require("../models/usersModel")
 
 require('dotenv').config()
 
 // middleware för authorisering
 router.use(authorize)
 
+//Middleware för att få enskilt cabin med id
 const getCabinById = async (req, res, next) => {
 
     const cabin = await Cabin.findOne({ _id: req.params.id }).exec()

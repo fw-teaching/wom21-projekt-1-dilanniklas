@@ -2,7 +2,7 @@
 @baseUrl = http://localhost:3030
 
 ### OBS. ändra då du använder den slutliga databasen:
-@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MTU2ZDUyYjkxMzZiNjdlZmU5OThmYjkiLCJlbWFpbCI6IkpvbmFzQGdtYWlsLmNvbW0iLCJpYXQiOjE2MzMwODA3MDUsImV4cCI6MTYzNTY3MjcwNX0.v8BiEOa5bv0hVLjeQbeT3Ia6ChUp74g_mwyjKxL9dv0
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MTU2ZDUyYjkxMzZiNjdlZmU5OThmYjkiLCJlbWFpbCI6IkpvbmFzQGdtYWlsLmNvbW0iLCJpYXQiOjE2MzMwOTM1NDQsImV4cCI6MTYzNTY4NTU0NH0.AYEbCzi8EKlB7kYcNoZwgnGj8g8osOignwXFYBS1O84
 GET {{baseUrl}}
 
 ### Registrera en ny användare
@@ -58,12 +58,12 @@ Authorization: Bearer {{token}}
 }
 
 ### Ändra hela objektet med PUT 
-PUT {{baseUrl}}/cabins/6156ffaee35c7d0b637f216f
+PUT {{baseUrl}}/cabins/61570104932917ac9aa81834
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-    "renter": "Lokin@gmail.com",
+    "renter": "Jonas@gmail.com",
     "address": "in the woods",
     "size": 20,
     "sauna": true,
@@ -72,7 +72,7 @@ Authorization: Bearer {{token}}
 }
 
 ### Ändra enskilt värde med PATCH 
-PATCH {{baseUrl}}/cabins/6156ffaee35c7d0b637f216f
+PATCH {{baseUrl}}/cabins/61570104932917ac9aa81834
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
@@ -83,7 +83,7 @@ Authorization: Bearer {{token}}
 
 
 ### Radera en stuga 
-DELETE {{baseUrl}}/cabins/6156ffaee35c7d0b637f216f
+DELETE {{baseUrl}}/cabins/61570717429168c608f191e8
 Authorization: Bearer {{token}}
 
 

@@ -12,7 +12,7 @@ module.exports = (req, res, next) => {
         console.log(`Authorized ${authUser.email}`)
         next()
     } catch (error) {
-        return res.json({message: error.message})
+        return res.json({message: "SIGN UP / SIGN IN first!"})
     }
 
 }
