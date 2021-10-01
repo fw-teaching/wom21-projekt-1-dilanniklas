@@ -9,7 +9,7 @@ module.exports = (req, res, next) => {
         const authUser = jwt.verify(token, process.env.JWT_SECRET)   //verifierar, ser om tokenen e skapad med samma secret
         
         req.authUser = authUser
-        console.log(`Authorized ${authUser.sub}`)
+        console.log(`Authorized ${authUser.email}`)
         next()
     } catch (error) {
         return res.json({message: "SIGN UP / SIGN IN first!"})

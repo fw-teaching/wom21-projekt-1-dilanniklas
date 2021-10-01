@@ -1,9 +1,8 @@
 
 @baseUrl = http://localhost:3030
 
-### OBS. ändra då du använder den slutliga databasen:
-@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MTU3MTJlODdlYzFjMjA2YmMxZjFjODkiLCJlbWFpbCI6IkpvbmFzQGdtYWlsLmNvbSIsImlhdCI6MTYzMzA5Njc5MywiZXhwIjoxNjM1Njg4NzkzfQ.3Va5UZyJLmal31IeEDOS28bkpzI2yZdAS5OA4YbiRcw
-GET {{baseUrl}}
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MTU3NTMzY2E1MmY2MTg5ZWM1NzZkNzgiLCJlbWFpbCI6ImtyYWFrYW5Aa3Jha21haWwuY29tIiwiaWF0IjoxNjMzMTEyOTY4LCJleHAiOjE2MzgyOTY5Njh9.4KpzVVI1C8jSpghW_Oomzo6M66qt68ai5bJFZszcjj0
+
 
 ### Registrera en ny användare
 POST {{baseUrl}}/users
@@ -22,7 +21,7 @@ POST {{baseUrl}}/users/login
 Content-Type: application/json
 
 {
-    "email": "Jonas@gmail.com",
+    "email": "kraakan@krakmail.com",
     "password": "hejhej123"
 }
 
@@ -32,7 +31,7 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-    "renter": "Drew Goddard",
+    "owner": "Drew Goddard",
     "address": "in the woods",
     "size": 30,
     "sauna": false,
@@ -46,7 +45,6 @@ GET {{baseUrl}}/cabins
 Authorization: Bearer {{token}}
 
 ### Hämta en viss stuga, inkl. bokningar
-
 GET {{baseUrl}}/cabins/6156ce1b783be1725a0f31ec
 Content-Type: application/json
 Authorization: Bearer {{token}}
@@ -57,27 +55,44 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-    "lodger": "Dilaan@gmail.com",
     "arrivalDate": "2021-09-30T10:32:09.146Z",
     "departureDate": "2021-09-30T11:26:56.392Z"
 }
 
-### Ändra hela objektet med PUT 
-PUT {{baseUrl}}/cabins/61570104932917ac9aa81834
+### Hämta alla bokningar
+GET {{baseUrl}}/bookings
+Authorization: Bearer {{token}}
+
+### Avboka 
+DELETE {{baseUrl}}/bookings/6157546d1f3ac10737cbed72
+Authorization: Bearer {{token}}
+
+### Ändra sin bokning 
+PUT {{baseUrl}}/bookings/6157546d1f3ac10737cbed72
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-    "renter": "Jonas@gmail.com",
+    "arrivalDate": "2021-01-01",
+    "departureDate": "2025-12-12"
+}
+
+### Ändra hela stug objektet med PUT 
+PUT {{baseUrl}}/cabins/6157557dd651adc8c18317f2
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "owner": "dilan@l.com",
     "address": "in the woods",
     "size": 20,
     "sauna": true,
-    "beach": false,
+    "beach": true,
     "price": 2
 }
 
-### Ändra enskilt värde med PATCH 
-PATCH {{baseUrl}}/cabins/61570104932917ac9aa81834
+### Ändra enskilt värde i stugan med PATCH 
+PATCH {{baseUrl}}/cabins/6157557dd651adc8c18317f2
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
@@ -88,7 +103,7 @@ Authorization: Bearer {{token}}
 
 
 ### Radera en stuga 
-DELETE {{baseUrl}}/cabins/61570717429168c608f191e8
+DELETE {{baseUrl}}/cabins/6157557dd651adc8c18317f2
 Authorization: Bearer {{token}}
 
 

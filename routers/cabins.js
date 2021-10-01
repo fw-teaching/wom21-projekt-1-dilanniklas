@@ -27,7 +27,7 @@ router.post('/', async (req, res) =>{
     try
     {
         const cabin = new Cabin({
-            renter: req.authUser.email,
+            owner: req.authUser.email,
             address: req.body.address,
             size: req.body.size,
             sauna: req.body.sauna,     
@@ -83,7 +83,7 @@ router.delete('/:id', getCabinById, async (req, res)=> {
     const authUser = jwt.verify(token, process.env.JWT_SECRET) //får den inloggades email ( authUser.email )
     const cabinEmail = await Cabin.findOne({ _id: req.params.id }).exec() //får email från vem posten är skapad av 
 
-    if(authUser.email == cabinEmail.renter  ) { //jämför om emailen är likadana 
+    if(authUser.email == cabinEmail.owner  ) { //jämför om emailen är likadana 
 
         await Cabin.deleteOne({_id: req.params.id }).exec()  // radera om det är samma email
         res.json({message: "Cabin deleted!"}) 
@@ -101,7 +101,7 @@ router.put('/:id', getCabinById, async (req, res) =>{
     const authUser = jwt.verify(token, process.env.JWT_SECRET)   //får den inloggades email
     const cabinEmail = await Cabin.findOne({ _id: req.params.id }).exec()   //får email från vem posten är skapad av 
 
-    if(authUser.email == cabinEmail.renter  ) {
+    if(authUser.email == cabinEmail.owner ) {
         const updatedCabin = await req.cabin.updateOne(req.body).exec()
   
         res.json({message: "Cabin updated!", modified: updatedCabin.modifiedCount}) 
@@ -119,7 +119,7 @@ router.patch('/:id', getCabinById, async (req, res) =>{
     const authUser = jwt.verify(token, process.env.JWT_SECRET)   //får den inloggades email
     const cabinEmail = await Cabin.findOne({ _id: req.params.id }).exec()   //får email från vem posten är skapad av 
 
-    if(authUser.email == cabinEmail.renter  ) {
+    if(authUser.email == cabinEmail.owner ) {
         const updatedCabin = await req.cabin.updateOne(req.body).exec()
   
         res.json({message: "Cabin updated!", modified: updatedCabin.modifiedCount}) 
