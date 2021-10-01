@@ -7,7 +7,11 @@ const bookingsSchema = new mongoose.Schema({
         ref: 'Cabins',
         required: true
     },
+<<<<<<< HEAD
     lodger: {
+=======
+    renter: {
+>>>>>>> dilan
         type: String,
         required: true,
     },

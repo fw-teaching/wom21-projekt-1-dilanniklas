@@ -26,7 +26,11 @@ router.post('/', async (req, res) =>{
     try
     {
         const cabin = new Cabin({
+<<<<<<< HEAD
             renter: req.authUser.email,
+=======
+            owner: req.authUser.email,
+>>>>>>> dilan
             address: req.body.address,
             size: req.body.size,
             sauna: req.body.sauna,     
@@ -66,13 +70,21 @@ router.delete('/:id', getCabinById, async (req, res)=> {
     const authUser = jwt.verify(token, process.env.JWT_SECRET) //får den inloggades email ( authUser.email )
     const cabinEmail = await Cabin.findOne({ _id: req.params.id }).exec() //får email från vem posten är skapad av 
 
+<<<<<<< HEAD
     if(authUser.email == cabinEmail.renter  ) { //jämför om emailen är likadana 
+=======
+    if(authUser.email == cabinEmail.owner ) { //jämför om emailen är likadana 
+>>>>>>> dilan
 
         await Cabin.deleteOne({_id: req.params.id }).exec()  // radera om det är samma email
         res.json({message: "Cabin deleted!"}) 
 
     } else {
+<<<<<<< HEAD
         res.status(500).send({auth:false, message:'Not allowed to delete others posts'})
+=======
+        res.status(500).send({message:'Not allowed to delete others posts'})
+>>>>>>> dilan
     }
 })  
 
@@ -84,12 +96,20 @@ router.put('/:id', getCabinById, async (req, res) =>{
     const authUser = jwt.verify(token, process.env.JWT_SECRET)   //får den inloggades email
     const cabinEmail = await Cabin.findOne({ _id: req.params.id }).exec()   //får email från vem posten är skapad av 
 
+<<<<<<< HEAD
     if(authUser.email == cabinEmail.renter  ) {
+=======
+    if(authUser.email == cabinEmail.owner  ) {
+>>>>>>> dilan
         const updatedCabin = await req.cabin.updateOne(req.body).exec()
   
         res.json({message: "Cabin updated!", modified: updatedCabin.modifiedCount}) 
     } else {
+<<<<<<< HEAD
         res.status(500).send({auth:false, message:'Not allowed to edit others posts'})
+=======
+        res.status(500).send({message:'Not allowed to edit others posts'})
+>>>>>>> dilan
     }
     
 })
@@ -102,12 +122,20 @@ router.patch('/:id', getCabinById, async (req, res) =>{
     const authUser = jwt.verify(token, process.env.JWT_SECRET)   //får den inloggades email
     const cabinEmail = await Cabin.findOne({ _id: req.params.id }).exec()   //får email från vem posten är skapad av 
 
+<<<<<<< HEAD
     if(authUser.email == cabinEmail.renter  ) {
+=======
+    if(authUser.email == cabinEmail.owner  ) {
+>>>>>>> dilan
         const updatedCabin = await req.cabin.updateOne(req.body).exec()
   
         res.json({message: "Cabin updated!", modified: updatedCabin.modifiedCount}) 
     } else {
+<<<<<<< HEAD
         res.status(500).send({auth:false, message:'Not allowed to edit others posts'})
+=======
+        res.status(500).send({message:'Not allowed to edit others posts'})
+>>>>>>> dilan
     }
     
 })
