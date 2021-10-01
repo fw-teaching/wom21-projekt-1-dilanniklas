@@ -30,6 +30,6 @@ const cabinsSchema = new mongoose.Schema({
 }, { timestamps: true })
 
 module.exports = mongoose.model(
-    'Advertise',
+    'Cabins',
     cabinsSchema
 )

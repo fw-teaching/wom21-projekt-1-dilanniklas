@@ -21,6 +21,6 @@ const userSchema = new mongoose.Schema({
 }, { timestamps: true })
 
 module.exports = mongoose.model(
-    'Register',
+    'Users',
     userSchema
 )

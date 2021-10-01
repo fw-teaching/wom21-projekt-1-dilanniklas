@@ -61,7 +61,7 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-    "owner": "Drew Goddard",
+    "owner": "Drew Godd",
     "address": "in the woods",
     "size": 30,
     "sauna": false,
@@ -71,19 +71,18 @@ Authorization: Bearer {{token}}
 }
 
 ### Boka en stuga 
-POST {{baseUrl}}/bookings
+POST {{baseUrl}}/bookings/6156cab7fa27037a3f5166b0
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-    "cabinId": "615600244463e33cc0704aaf", 
     "lodger": "Dilaan@gmail.com",
     "arrivalDate": "2021-09-30T10:32:09.146Z",
     "departureDate": "2021-09-30T11:26:56.392Z"
 }
 
 ### Ändra något i en stuga
-PUT {{baseUrl}}/cabins/615600244463e33cc0704aaf
+PUT {{baseUrl}}/cabins/6156cab7fa27037a3f5166b0
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
