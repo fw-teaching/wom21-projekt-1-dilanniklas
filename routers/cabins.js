@@ -27,7 +27,7 @@ router.post('/', async (req, res) =>{
     try
     {
         const cabin = new Cabin({
-            renter: req.authUser.email,
+            owner: req.authUser.email,
             address: req.body.address,
             size: req.body.size,
             sauna: req.body.sauna,     
@@ -62,7 +62,8 @@ router.get('/', async (req, res) =>{
 // Hämta en stuga och visa dess bokningar
 
 router.get('/:cabin_id', async (req, res) =>{
-const cabin = await Cabin.findOne({ cabin: req.params.cabin_id }).populate('bookings')
+console.log(req.params.cabin_id)
+const cabin = await Cabin.findOne({ _id: req.params.cabin_id }).populate('bookings')
 // OBS. populate() fungerar inte som det ska, men fältet lagras över på nästa rad
 cabin['bookings'] = await Booking.find({cabinId: req.params.cabin_id})
 res.status(201).send(cabin)
