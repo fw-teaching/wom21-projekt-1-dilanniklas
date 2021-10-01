@@ -4,6 +4,9 @@ const jwt = require("jsonwebtoken")
 const Cabin = require("../models/cabinsModel")
 const Booking = require("../models/bookingsModel")
 const authorize = require('../middleware/authorize')
+const usersModel = require("../models/usersModel")
+
+require('dotenv').config()
 
 // middleware för authorisering
 router.use(authorize)
@@ -16,6 +19,7 @@ const getCabinById = async (req, res, next) => {
     req.cabin = cabin //ett monguus objekt
     next()
 }
+
 
 // Skapa en annons med POST
 router.post('/', async (req, res) =>{
@@ -55,27 +59,58 @@ router.get('/', async (req, res) =>{
     }
 })
 
-//PUT ändrar på någonting
-router.put('/:id', getCabinById, async (req, res) => { 
-    try {
+//Raderar 
+router.delete('/:id', getCabinById, async (req, res)=> {
+    const authHeader = req.headers['authorization']
+    const token = authHeader?.split(' ')[1]   //splittar för att få bort Bearer
+
+    const authUser = jwt.verify(token, process.env.JWT_SECRET) //får den inloggades email ( authUser.email )
+    const cabinEmail = await Cabin.findOne({ _id: req.params.id }).exec() //får email från vem posten är skapad av 
+
+    if(authUser.email == cabinEmail.renter  ) { //jämför om emailen är likadana 
+
+        await Cabin.deleteOne({_id: req.params.id }).exec()  // radera om det är samma email
+        res.json({message: "Cabin deleted!"}) 
+
+    } else {
+        res.status(500).send({auth:false, message:'Not allowed to delete others posts'})
+    }
+})  
+
+//Ändrar med put 
+router.put('/:id', getCabinById, async (req, res) =>{
+    const authHeader = req.headers['authorization']
+    const token = authHeader?.split(' ')[1]
+
+    const authUser = jwt.verify(token, process.env.JWT_SECRET)   //får den inloggades email
+    const cabinEmail = await Cabin.findOne({ _id: req.params.id }).exec()   //får email från vem posten är skapad av 
+
+    if(authUser.email == cabinEmail.renter  ) {
         const updatedCabin = await req.cabin.updateOne(req.body).exec()
   
         res.json({message: "Cabin updated!", modified: updatedCabin.modifiedCount}) 
-
-    } catch (error) {
-        res.status(500).send(error.message)
+    } else {
+        res.status(500).send({auth:false, message:'Not allowed to edit others posts'})
     }
+    
 })
 
-//Raderar 
-router.delete('/:id', getCabinById, async (req, res)=> {
-    try {
-        await Cabin.deleteOne({_id: req.params.id }).exec()
-        res.json({message: "Cabin deleted!"})
+//Ändrar med patch
+router.patch('/:id', getCabinById, async (req, res) =>{
+    const authHeader = req.headers['authorization']   
+    const token = authHeader?.split(' ')[1]  
 
-    } catch (error) {
-        res.status(500).send(error.message)
+    const authUser = jwt.verify(token, process.env.JWT_SECRET)   //får den inloggades email
+    const cabinEmail = await Cabin.findOne({ _id: req.params.id }).exec()   //får email från vem posten är skapad av 
+
+    if(authUser.email == cabinEmail.renter  ) {
+        const updatedCabin = await req.cabin.updateOne(req.body).exec()
+  
+        res.json({message: "Cabin updated!", modified: updatedCabin.modifiedCount}) 
+    } else {
+        res.status(500).send({auth:false, message:'Not allowed to edit others posts'})
     }
-})   
+    
+})
 
 module.exports = router

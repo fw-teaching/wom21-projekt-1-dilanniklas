@@ -54,7 +54,7 @@ router.post('/login', async (req, res) =>{
             return res.status(201).send({accessToken: accessToken})
         }
        
-         res.status(201).send('failed')
+         res.status(201).send('No such user!')
 
     } catch (error) {
         res.status(500).json({message: error.message})
