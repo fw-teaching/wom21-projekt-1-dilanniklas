@@ -1,7 +1,7 @@
 
 @baseUrl = http://localhost:3030
 // OBS. ändra då du använder den slutliga databasen:
-@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MTU1N2NhZjUzYWJmNTY5YmY5NGU0MGEiLCJlbWFpbCI6IkRpbGFuQGdtYWlsLmNvbW0iLCJpYXQiOjE2MzMwMDAwOTMsImV4cCI6MTYzNTU5MjA5M30.ZwOp6Am1S_hQnx2plBToHA2cTraTLB9ybIceWfRlCVE
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MTU2YmEwMmQxODNjMGQyZWQyZDFjZmIiLCJlbWFpbCI6ImtyYWFrYW5Aa3JhYWttYWlsLmNvbSIsImlhdCI6MTYzMzA3Mzg0MiwiZXhwIjoxNjM1NjY1ODQyfQ.l7JP8iWTot37N1Ee5AtY4PVk0sQduhvxaH9bEZaUWEc
 GET {{baseUrl}}
 
 ### Regisrera en ny användare
@@ -10,10 +10,10 @@ POST {{baseUrl}}/user
 Content-Type: application/json
 
 {
-    "name": "Dilan",
-    "surname": "Ledeon",
-    "email": "Dilan@gmail.comm",
-    "password": "hejhej123"
+    "name": "Kråkan",
+    "surname": "Krogerus",
+    "email": "kraakan@kraakmail.com",
+    "password": "password"
 
 }
 
@@ -23,8 +23,8 @@ POST {{baseUrl}}/user/login
 Content-Type: application/json
 
 {
-    "email": "Dilan@gmail.comm",
-    "password": "hejhej123"
+    "email": "kraakan@kraakmail.com",
+    "password": "password"
 }
 
 ### Annonsera en ny stuga
@@ -34,8 +34,7 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-    "renter": "Drew Goddard",
-    "address": "in the woods",
+    "address": "in a tree",
     "size": 30,
     "sauna": false,
     "beach": false,
@@ -51,12 +50,12 @@ Authorization: Bearer {{token}}
 
 ### Hämta en viss stuga, inkl. bokningar
 
-GET {{baseUrl}}/cabins/61560ce8b718241d9f467c71
+GET {{baseUrl}}/cabins/6156be4a98db0ffce69a5ac8
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 ### Boka stuga
-POST {{baseUrl}}/bookings/61560ce8b718241d9f467c71
+POST {{baseUrl}}/bookings/6156be4a98db0ffce69a5ac8
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
