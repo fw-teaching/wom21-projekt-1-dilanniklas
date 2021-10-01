@@ -1,14 +1,8 @@
 
-@baseUrl = http://localhost:3030
+@baseUrl=http://localhost:3030
 
-<<<<<<< HEAD
-@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MTU3NTMzY2E1MmY2MTg5ZWM1NzZkNzgiLCJlbWFpbCI6ImtyYWFrYW5Aa3Jha21haWwuY29tIiwiaWF0IjoxNjMzMTEyOTY4LCJleHAiOjE2MzgyOTY5Njh9.4KpzVVI1C8jSpghW_Oomzo6M66qt68ai5bJFZszcjj0
-
-=======
-### OBS. ändra då du använder den slutliga databasen:
-@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MTU3NTFlYWQ3NWYxNzg5M2JjZWM0NzMiLCJlbWFpbCI6ImtyYWFrYW5Aa3Jha21haWwuY29tIiwiaWF0IjoxNjMzMTEyNTYwLCJleHAiOjE2MzgyOTY1NjB9.pGvuCJbQieGTU0tor6aoP3xRnTiFPvk-xYxlwyvCfzk
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MTU3NTMzY2E1MmY2MTg5ZWM1NzZkNzgiLCJlbWFpbCI6ImtyYWFrYW5Aa3Jha21haWwuY29tIiwiaWF0IjoxNjMzMTE2MDE1LCJleHAiOjE2MzgzMDAwMTV9.qJQ19HeJpH549pPo8F55PSncXM-P7P-1GK6QB_a_-1U
 GET {{baseUrl}}
->>>>>>> 35ca85b321abfb1fd8cb1ff5cf4ada4672de8ce7
 
 ### Registrera en ny användare
 POST {{baseUrl}}/users
@@ -17,7 +11,7 @@ Content-Type: application/json
 {
     "name": "Kråkan",
     "surname": "Kråkanson",
-    "email": "kraakan@krakmail.com",
+    "email": "kraakaan@krakmaill.com",
     "password": "hejhej123"
 
 }
@@ -51,17 +45,12 @@ GET {{baseUrl}}/cabins
 Authorization: Bearer {{token}}
 
 ### Hämta en viss stuga, inkl. bokningar
-<<<<<<< HEAD
-GET {{baseUrl}}/cabins/6156ce1b783be1725a0f31ec
-=======
-
-GET {{baseUrl}}/cabins/615752529434c05f1199b1a9
->>>>>>> 35ca85b321abfb1fd8cb1ff5cf4ada4672de8ce7
+GET {{baseUrl}}/cabins/615731fed16595269a4d721e
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 ### Boka en stuga -- om stugan inte är ledig på den givna tiden returneras datumen för de överlappande boknignarna
-POST {{baseUrl}}/bookings/615752529434c05f1199b1a9
+POST {{baseUrl}}/bookings/615731fed16595269a4d721e
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
@@ -70,36 +59,32 @@ Authorization: Bearer {{token}}
     "departureDate": "2021-09-30T11:26:56.392Z"
 }
 
-<<<<<<< HEAD
 ### Hämta alla bokningar
 GET {{baseUrl}}/bookings
 Authorization: Bearer {{token}}
 
 ### Avboka 
-DELETE {{baseUrl}}/bookings/6157546d1f3ac10737cbed72
+DELETE {{baseUrl}}/bookings/6157389f68bca1999e22d7fd
 Authorization: Bearer {{token}}
 
 ### Ändra sin bokning 
-PUT {{baseUrl}}/bookings/6157546d1f3ac10737cbed72
+PUT {{baseUrl}}/bookings/6157389f68bca1999e22d7fd
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
     "arrivalDate": "2021-01-01",
-    "departureDate": "2025-12-12"
+    "departureDate": "2023-12-12"
 }
 
-### Ändra hela stug objektet med PUT 
-PUT {{baseUrl}}/cabins/6157557dd651adc8c18317f2
-=======
-### Ändra hela objektet med PUT 
-PUT {{baseUrl}}/cabins/615752529434c05f1199b1a9
->>>>>>> 35ca85b321abfb1fd8cb1ff5cf4ada4672de8ce7
+
+### Ändra sitt stugobjekt, med PUT 
+PUT {{baseUrl}}/cabins/615731fed16595269a4d721e
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-    "owner": "dilan@l.com",
+    "owner": "kraakan@krakmail.com",
     "address": "in the woods",
     "size": 20,
     "sauna": true,
@@ -107,13 +92,8 @@ Authorization: Bearer {{token}}
     "price": 2
 }
 
-<<<<<<< HEAD
-### Ändra enskilt värde i stugan med PATCH 
-PATCH {{baseUrl}}/cabins/6157557dd651adc8c18317f2
-=======
-### Ändra enskilt värde med PATCH 
-PATCH {{baseUrl}}/cabins/615752529434c05f1199b1a9
->>>>>>> 35ca85b321abfb1fd8cb1ff5cf4ada4672de8ce7
+### Ändra enskilt värde i sin stuga,  med PATCH 
+PATCH {{baseUrl}}/cabins/615731fed16595269a4d721e
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
@@ -123,12 +103,8 @@ Authorization: Bearer {{token}}
 }
 
 
-### Radera en stuga 
-<<<<<<< HEAD
-DELETE {{baseUrl}}/cabins/6157557dd651adc8c18317f2
-=======
-DELETE {{baseUrl}}/cabins/615752529434c05f1199b1a9
->>>>>>> 35ca85b321abfb1fd8cb1ff5cf4ada4672de8ce7
+### Radera sin stuga 
+DELETE {{baseUrl}}/cabins/615731fed16595269a4d721e
 Authorization: Bearer {{token}}
 
 

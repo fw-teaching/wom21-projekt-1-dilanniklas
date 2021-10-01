@@ -59,8 +59,8 @@ router.get('/', async (req, res) =>{
     }
 })
 
-// Hämta en stuga och visa dess bokningar
 
+// Hämta en stuga och visa dess bokningar
 router.get('/:cabin_id', async (req, res) =>{
 console.log(req.params.cabin_id)
 const cabin = await Cabin.findOne({ _id: req.params.cabin_id }).populate('bookings')
@@ -69,12 +69,6 @@ cabin['bookings'] = await Booking.find({cabinId: req.params.cabin_id})
 res.status(201).send(cabin)
 })
 
-// idé: lista stugor som är lediga en viss tid
-// router.get('/available/date_range', async (req, res) =>{
-//     const bookings = await Cabin.
-//             findOne({ cabin: req.params.cabin_id }).
-//             populate('booking')
-//     })
 
 //Raderar 
 router.delete('/:id', getCabinById, async (req, res)=> {
@@ -90,7 +84,7 @@ router.delete('/:id', getCabinById, async (req, res)=> {
         res.json({message: "Cabin deleted!"}) 
 
     } else {
-        res.status(500).send({auth:false, message:'Not allowed to delete others posts'})
+        res.status(500).send({message:'Not allowed to delete others posts'})
     }
 })  
 
@@ -107,7 +101,7 @@ router.put('/:id', getCabinById, async (req, res) =>{
   
         res.json({message: "Cabin updated!", modified: updatedCabin.modifiedCount}) 
     } else {
-        res.status(500).send({auth:false, message:'Not allowed to edit others posts'})
+        res.status(500).send({message:'Not allowed to edit others posts'})
     }
     
 })
@@ -125,7 +119,7 @@ router.patch('/:id', getCabinById, async (req, res) =>{
   
         res.json({message: "Cabin updated!", modified: updatedCabin.modifiedCount}) 
     } else {
-        res.status(500).send({auth:false, message:'Not allowed to edit others posts'})
+        res.status(500).send({message:'Not allowed to edit others posts'})
     }
     
 })
