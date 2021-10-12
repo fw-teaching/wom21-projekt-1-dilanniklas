@@ -68,6 +68,29 @@ cabin['bookings'] = await Booking.find({cabinId: req.params.cabin_id})
 res.status(201).send(cabin)
 })
 
+// TODO: Hämta alla stugor som ägs av användaren (renter) ------------------------ /cabins/owned
+router.post('/owned', async (req, res) =>{
+    // 1. HÄMTA ANVÄNDARENS EMAIL FRÅN USERS-TABELLEN
+    const authHeader = req.headers['authorization']
+    const token = authHeader?.split(' ')[1]   //splittar för att få bort Bearer
+    const authUser = jwt.verify(token, process.env.JWT_SECRET) //får den inloggades email ( authUser.email )
+
+    console.log(authUser.email)
+    try
+    {
+        const cabins = await Cabin.find({renter: authUser.email})
+
+        console.log(authUser.email)
+        res.status(201).send(cabins)
+    }
+    catch (error)
+    {
+        console.log(authUser.email)
+        res.status(500).json({message: error.message})
+    }
+
+    // 2. HÄMTA ALLA STUGOR MED DEN ANVÄNDAREN
+})
 // idé: lista stugor som är lediga en viss tid
 // router.get('/available/date_range', async (req, res) =>{
 //     const bookings = await Cabin.

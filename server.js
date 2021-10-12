@@ -34,5 +34,4 @@ const bookingsRouter = require('./routers/bookings')
 app.use('/bookings', bookingsRouter)
 
 
-
 app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
