@@ -2,7 +2,7 @@
 @baseUrl = http://localhost:3030
 
 ### OBS. ändra då du använder den slutliga databasen:
-@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MTU3NTFlYWQ3NWYxNzg5M2JjZWM0NzMiLCJlbWFpbCI6ImtyYWFrYW5Aa3Jha21haWwuY29tIiwiaWF0IjoxNjMzMTEyNTYwLCJleHAiOjE2MzgyOTY1NjB9.pGvuCJbQieGTU0tor6aoP3xRnTiFPvk-xYxlwyvCfzk
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MTU3NTFlYWQ3NWYxNzg5M2JjZWM0NzMiLCJlbWFpbCI6ImtyYWFrYW5Aa3Jha21haWwuY29tIiwiaWF0IjoxNjM0MDY4MjMwLCJleHAiOjE2MzY2NjAyMzB9.VpnFgaOfbcpkHVOYQbRDp6q3VCAWo8uZGn8htEsO_bU
 GET {{baseUrl}}
 
 ### Registrera en ny användare
@@ -42,7 +42,7 @@ Authorization: Bearer {{token}}
 }
 
 ### Hämta egna stugor
-POST {{baseUrl}}/cabins/owned
+GET {{baseUrl}}/cabins/owned
 Content-Type: application/json
 Authorization: Bearer {{token}}
 

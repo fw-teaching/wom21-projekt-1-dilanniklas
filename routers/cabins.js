@@ -59,18 +59,10 @@ router.get('/', async (req, res) =>{
     }
 })
 
-// Hämta en stuga och visa dess bokningar
 
-router.get('/:cabin_id', async (req, res) =>{
-const cabin = await Cabin.findOne({ cabin: req.params.cabin_id }).populate('bookings')
-// OBS. populate() fungerar inte som det ska, men fältet lagras över på nästa rad
-cabin['bookings'] = await Booking.find({cabinId: req.params.cabin_id})
-res.status(201).send(cabin)
-})
 
 // TODO: Hämta alla stugor som ägs av användaren (renter) ------------------------ /cabins/owned
-router.post('/owned', async (req, res) =>{
-    // 1. HÄMTA ANVÄNDARENS EMAIL FRÅN USERS-TABELLEN
+router.get('/owned', async (req, res) =>{
     const authHeader = req.headers['authorization']
     const token = authHeader?.split(' ')[1]   //splittar för att få bort Bearer
     const authUser = jwt.verify(token, process.env.JWT_SECRET) //får den inloggades email ( authUser.email )
@@ -88,9 +80,17 @@ router.post('/owned', async (req, res) =>{
         console.log(authUser.email)
         res.status(500).json({message: error.message})
     }
-
-    // 2. HÄMTA ALLA STUGOR MED DEN ANVÄNDAREN
 })
+
+// Hämta en stuga och visa dess bokningar
+
+router.get('/:cabin_id', async (req, res) =>{
+    const cabin = await Cabin.findOne({ cabin: req.params.cabin_id }).populate('bookings')
+    // OBS. populate() fungerar inte som det ska, men fältet lagras över på nästa rad
+    cabin['bookings'] = await Booking.find({cabinId: req.params.cabin_id})
+    res.status(201).send(cabin)
+    })
+
 // idé: lista stugor som är lediga en viss tid
 // router.get('/available/date_range', async (req, res) =>{
 //     const bookings = await Cabin.
