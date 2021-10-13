@@ -51,7 +51,7 @@ router.post('/login', async (req, res) =>{
                 {expiresIn: '60d'}
             )
 
-            return res.status(201).send({accessToken: accessToken})
+            return res.status(201).send(accessToken)
         }
        
          res.status(201).send('No such user!')

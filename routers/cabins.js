@@ -59,6 +59,27 @@ router.get('/', async (req, res) =>{
     }
 })
 
+// TODO: Hämta alla stugor som ägs av användaren (owner) ------------------------ /cabins/owned
+router.get('/owned', async (req, res) =>{
+    const authHeader = req.headers['authorization']
+    const token = authHeader?.split(' ')[1]   //splittar för att få bort Bearer
+    const authUser = jwt.verify(token, process.env.JWT_SECRET) //får den inloggades email ( authUser.email )
+
+    console.log(authUser.email)
+    try
+    {
+        const cabins = await Cabin.find({owner: authUser.email})
+
+        console.log(authUser.email)
+        res.status(201).send(cabins)
+    }
+    catch (error)
+    {
+        console.log(authUser.email)
+        res.status(500).json({message: error.message})
+    }
+})
+
 
 // Hämta en stuga och visa dess bokningar
 router.get('/:cabin_id', async (req, res) =>{

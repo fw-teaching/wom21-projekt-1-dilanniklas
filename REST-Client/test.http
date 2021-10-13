@@ -1,7 +1,7 @@
 
 @baseUrl=http://localhost:3030
 
-@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MTU3NTMzY2E1MmY2MTg5ZWM1NzZkNzgiLCJlbWFpbCI6ImtyYWFrYW5Aa3Jha21haWwuY29tIiwiaWF0IjoxNjMzMTE2MDE1LCJleHAiOjE2MzgzMDAwMTV9.qJQ19HeJpH549pPo8F55PSncXM-P7P-1GK6QB_a_-1U
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MTU3NTMzY2E1MmY2MTg5ZWM1NzZkNzgiLCJlbWFpbCI6ImtyYWFrYW5Aa3Jha21haWwuY29tIiwiaWF0IjoxNjM0MTE0NDU0LCJleHAiOjE2MzkyOTg0NTR9.UR1U8LNwLn-39wU5LovJAaXlwTU9N2T5uR-pVhwab1w
 GET {{baseUrl}}
 
 ### Registrera en ny användare
@@ -11,10 +11,15 @@ Content-Type: application/json
 {
     "name": "Kråkan",
     "surname": "Kråkanson",
-    "email": "kraakaan@krakmaill.com",
+    "email": "kraakan@krakmail.com",
     "password": "hejhej123"
 
 }
+
+### Get cabins owned
+GET {{baseUrl}}/cabins/owned
+Content-Type: application/json
+Authorization: Bearer {{token}}
 
 ### Logga in 
 POST {{baseUrl}}/users/login
@@ -31,8 +36,8 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-    "owner": "Drew Goddard",
-    "address": "in the woods",
+    "owner": "Test",
+    "address": "Karjaa",
     "size": 30,
     "sauna": false,
     "beach": false,
