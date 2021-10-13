@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 require("../models/bookingsModel")
 
 const cabinsSchema = new mongoose.Schema({
-    renter: {
+    owner: {
         type: String,
         required: true,
     },
@@ -26,7 +26,9 @@ const cabinsSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    bookings: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Bookings' }]
+    bookings: [{ 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Bookings' }]
 }, { timestamps: true })
 
 module.exports = mongoose.model(

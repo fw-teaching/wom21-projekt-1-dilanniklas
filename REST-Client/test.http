@@ -1,5 +1,5 @@
 
-@baseUrl = http://localhost:3030
+@baseUrl=http://localhost:3030
 
 ### OBS. ändra då du använder den slutliga databasen:
 @token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MTU3NTFlYWQ3NWYxNzg5M2JjZWM0NzMiLCJlbWFpbCI6ImtyYWFrYW5Aa3Jha21haWwuY29tIiwiaWF0IjoxNjM0MDY4MjMwLCJleHAiOjE2MzY2NjAyMzB9.VpnFgaOfbcpkHVOYQbRDp6q3VCAWo8uZGn8htEsO_bU
@@ -12,7 +12,7 @@ Content-Type: application/json
 {
     "name": "Kråkan",
     "surname": "Kråkanson",
-    "email": "kraakan@krakmail.com",
+    "email": "kraakaan@krakmaill.com",
     "password": "hejhej123"
 
 }
@@ -63,27 +63,47 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-    "lodger": "Dilaan@gmail.com",
     "arrivalDate": "2021-09-30T10:32:09.146Z",
     "departureDate": "2021-09-30T11:26:56.392Z"
 }
 
 ### Ändra hela objektet med PUT 
 PUT {{baseUrl}}/cabins/615752529434c05f1199b1a9
+### Hämta alla bokningar
+GET {{baseUrl}}/bookings
+Authorization: Bearer {{token}}
+
+### Avboka 
+DELETE {{baseUrl}}/bookings/6157389f68bca1999e22d7fd
+Authorization: Bearer {{token}}
+
+### Ändra sin bokning 
+PUT {{baseUrl}}/bookings/6157389f68bca1999e22d7fd
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-    "renter": "Jonas@gmail.com",
+    "arrivalDate": "2021-01-01",
+    "departureDate": "2023-12-12"
+}
+
+
+### Ändra sitt stugobjekt, med PUT 
+PUT {{baseUrl}}/cabins/615731fed16595269a4d721e
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "owner": "kraakan@krakmail.com",
     "address": "in the woods",
     "size": 20,
     "sauna": true,
-    "beach": false,
+    "beach": true,
     "price": 2
 }
 
-### Ändra enskilt värde med PATCH 
-PATCH {{baseUrl}}/cabins/615759bc93445c851232d48e
+### Ändra enskilt värde i sin stuga,  med PATCH 
+PATCH {{baseUrl}}/cabins/615731fed16595269a4d721e
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
@@ -92,8 +112,9 @@ Authorization: Bearer {{token}}
     "beach": false
 }
 
-### Radera en stuga 
-DELETE {{baseUrl}}/cabins/615759bc93445c851232d48e
+
+### Radera sin stuga 
+DELETE {{baseUrl}}/cabins/615731fed16595269a4d721e
 Authorization: Bearer {{token}}
 
 ### Hämta stugorna som användaren äger

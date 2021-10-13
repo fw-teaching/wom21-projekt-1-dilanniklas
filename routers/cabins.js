@@ -27,7 +27,7 @@ router.post('/', async (req, res) =>{
     try
     {
         const cabin = new Cabin({
-            renter: req.authUser.email,
+            owner: req.authUser.email,
             address: req.body.address,
             size: req.body.size,
             sauna: req.body.sauna,     
@@ -84,6 +84,7 @@ router.get('/owned', async (req, res) =>{
 
 // Hämta en stuga och visa dess bokningar
 
+// Hämta en stuga och visa dess bokningar
 router.get('/:cabin_id', async (req, res) =>{
     const cabin = await Cabin.findOne({ cabin: req.params.cabin_id }).populate('bookings')
     // OBS. populate() fungerar inte som det ska, men fältet lagras över på nästa rad
@@ -91,12 +92,6 @@ router.get('/:cabin_id', async (req, res) =>{
     res.status(201).send(cabin)
     })
 
-// idé: lista stugor som är lediga en viss tid
-// router.get('/available/date_range', async (req, res) =>{
-//     const bookings = await Cabin.
-//             findOne({ cabin: req.params.cabin_id }).
-//             populate('booking')
-//     })
 
 //Raderar 
 router.delete('/:id', getCabinById, async (req, res)=> {
@@ -112,7 +107,7 @@ router.delete('/:id', getCabinById, async (req, res)=> {
         res.json({message: "Cabin deleted!"}) 
 
     } else {
-        res.status(500).send({auth:false, message:'Not allowed to delete others posts'})
+        res.status(500).send({message:'Not allowed to delete others posts'})
     }
 })  
 
@@ -124,12 +119,12 @@ router.put('/:id', getCabinById, async (req, res) =>{
     const authUser = jwt.verify(token, process.env.JWT_SECRET)   //får den inloggades email
     const cabinEmail = await Cabin.findOne({ _id: req.params.id }).exec()   //får email från vem posten är skapad av 
 
-    if(authUser.email == cabinEmail.owner  ) {
+    if(authUser.email == cabinEmail.owner ) {
         const updatedCabin = await req.cabin.updateOne(req.body).exec()
   
         res.json({message: "Cabin updated!", modified: updatedCabin.modifiedCount}) 
     } else {
-        res.status(500).send({auth:false, message:'Not allowed to edit others posts'})
+        res.status(500).send({message:'Not allowed to edit others posts'})
     }
     
 })
@@ -142,12 +137,12 @@ router.patch('/:id', getCabinById, async (req, res) =>{
     const authUser = jwt.verify(token, process.env.JWT_SECRET)   //får den inloggades email
     const cabinEmail = await Cabin.findOne({ _id: req.params.id }).exec()   //får email från vem posten är skapad av 
 
-    if(authUser.email == cabinEmail.owner  ) {
+    if(authUser.email == cabinEmail.owner ) {
         const updatedCabin = await req.cabin.updateOne(req.body).exec()
   
         res.json({message: "Cabin updated!", modified: updatedCabin.modifiedCount}) 
     } else {
-        res.status(500).send({auth:false, message:'Not allowed to edit others posts'})
+        res.status(500).send({message:'Not allowed to edit others posts'})
     }
     
 })

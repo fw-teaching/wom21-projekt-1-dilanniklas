@@ -48,7 +48,7 @@ router.post('/login', async (req, res) =>{
             const accessToken = await jwt.sign(  
                 jwtBody,   //payload
                 process.env.JWT_SECRET,  //nyckeln
-                {expiresIn: '30d'}
+                {expiresIn: '60d'}
             )
 
             return res.status(201).send(accessToken)
